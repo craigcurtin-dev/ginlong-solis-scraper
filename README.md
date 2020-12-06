@@ -45,6 +45,26 @@ Note that if you have more than 1 device - then it is not readily apparent where
 In that case - setup the script, and set LOG_LEVEL to DEBUG, then view the logs and search for deviceId - 
 this will list the IDs of each inverter.
 
+Note that the TZData package will not be installed in the container - do the following from the sh shell prompt in the container
+
+apk add tzdata
+ls /usr/share/zoneinfo
+
+Suppose you want to use Sydney - Australia 
+
+First copy the proper zone to localtime
+
+cp /usr/share/zoneinfo/Australia/Sydney /etc/localtime
+Now specify your timezone
+
+echo "Australia/Sydney" >  /etc/timezone
+date
+Result: Wed Mar 8 00:46:05 CET 2006
+
+You can now remove the other timezones
+
+apk del tzdata
+
 
 
 ## Bonus
